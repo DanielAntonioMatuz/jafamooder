@@ -1,0 +1,123 @@
+<!--<h1>{{clima.temperatura}}</h1>
+<table border="1">
+  <tr>
+    <td>Codigo</td><td>Descripcion</td><td>Precio</td>
+  </tr>
+{{#each articulos}}
+  <tr>  
+     <td>{{codigo}} </td> <td>{{descripcion}}</td> <td>{{precio}}</td>
+  </tr>   
+{{/each}}
+</table>
+<p>Descuentos vigentes el día lunes:{{descuento.lunes}}</p>
+<p>Descuentos vigentes el día martes:{{descuento.martes}}</p> -->
+
+
+
+<!doctype html>
+<html lang="en" style="background: var(--negro) 0% 0% no-repeat padding-box;">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="../public/stylesheets/style.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Hello, world!</title>
+</head>
+<body>
+
+<!-- navbar -->
+<header class="principal fixed-top">
+    <nav class="navb ">
+        <a href="#"><h1 class="titulo titulo2">JAFA| <strong class="mood">MOODER</strong></h1></a>
+    </nav>
+</header>
+<!-- navbar -->
+
+<!-- clima -->
+<div class="clima ">
+    <div class="imagen">
+
+        <img src="./img/sol.png" alt="" class="sol">
+    </div>
+    <h1 class="temp">{{clima.temperatura}}°c</h1>
+    <h2 class="info">Centigrados</h2>
+
+    <h1 class="temp">{{clima.humedad}}%</h1>
+    <h2 class="info">Humedad</h2>
+</div>
+<!-- clima -->
+
+
+
+
+<!-- Seccion de playlist -->
+<div class="playlista">
+
+
+    <h1 class="ligas">Canciones</h1>
+
+    <table class="tabla " align="center">
+        <tr class="cabeceraTabla">
+            <td>
+                #
+            </td>
+            <td>
+                Titulo
+            </td>
+            <td>
+                Artista
+            </td>
+            <td>
+                Duracion
+            </td>
+        </tr>
+
+
+        {{#each rolas}}
+            <tr>
+                <td class="numeroCancion">
+                    1
+                </td>
+                <td>
+                    {{nombre}}
+                </td>
+                <td>
+                    {{url}}
+                </td>
+                <td>
+                    3:40
+                </td>
+            </tr>
+        {{/each}}
+
+    </table>
+
+
+
+
+</div>
+<!-- Seccion de playlist -->
+
+
+
+<!-- footer -->
+<div class="reproductor fixed-bottom">
+
+    <iframe src="https://open.spotify.com/embed/album/1DFixLWuPkv3KT3TnV35m3" width="100%" height="380"  frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+
+
+</div>
+<!-- footer -->
+
+
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>
