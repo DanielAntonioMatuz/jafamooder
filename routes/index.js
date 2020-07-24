@@ -20,20 +20,20 @@ var estadoClima;
 var rolas=[];
 var urlrolas=[];
 var listaderepro=[];
+var duration;
+var titulo;
+var seconds = Math.floor((duration / 1000) % 60),
+    minutes = Math.floor((duration / (1000 * 60)) % 60);
 
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
       var datos={
-             titulo:'Articulos disponibles a la fecha',
-             articulos: [
-               { codigo: 1,precio:12,descripcion: 'peras' },
-               { codigo: 2,precio:132,descripcion: 'manzanas' },
-               { codigo: 3,precio:23,descripcion: 'naranjas' },
-             ],
              descuento:{lunes:'5%',martes:'10%'},
              clima: {temperatura: temperatura.toFixed(1), humedad: humedad},
-             rolas
+             rolas,
+             listaderepro,
+             titulo
           }
        res.render('index', datos);
 });
@@ -96,7 +96,9 @@ function Playlist() {
             for (let i = 0; i < body.items.length; i++) {
                 if(body.items[i].name==estadoClima){
                     playlist_url = body.items[i].href;
-                    listaderepro =  body.items[i].external_urls.spotify;
+                    listaderepro = body.items[i].id;
+                    titulo = body.items[i].name;
+
                 }
 
                 //console.log(body.items[i].name);
@@ -110,7 +112,10 @@ function Playlist() {
                 request.get(option, function(error, response, body) {
                     if (response) {
                         for (let x = 0; x < body.tracks.items.length; x++) {
-                            rolas.push({nombre: body.tracks.items[x].track.name, url: body.tracks.items[x].track.external_urls.spotify});
+                            rolas.push({nombre: body.tracks.items[x].track.name, url: body.tracks.items[x].track.external_urls.spotify, artista: body.tracks.items[x].track.artists[0].name,
+                                duration: getYoutubeLikeToDisplay(body.tracks.items[x].track.duration_ms), image: body.tracks.items[x].track.album.images[0].url
+
+                            });
 
                             urlrolas.push(body.tracks.items[x].track.external_urls.spotify);
                             //console.log(body.tracks.items[x].track.external_urls.spotify);
@@ -125,7 +130,24 @@ function Playlist() {
     });
 }
 
+function getYoutubeLikeToDisplay(millisec) {
+    var seconds = (millisec / 1000).toFixed(0);
+    var minutes = Math.floor(seconds / 60);
+    var hours = "";
+    if (minutes > 59) {
+        hours = Math.floor(minutes / 60);
+        hours = (hours >= 10) ? hours : "0" + hours;
+        minutes = minutes - (hours * 60);
+        minutes = (minutes >= 10) ? minutes : "0" + minutes;
+    }
 
+    seconds = Math.floor(seconds % 60);
+    seconds = (seconds >= 10) ? seconds : "0" + seconds;
+    if (hours != "") {
+        return hours + ":" + minutes + ":" + seconds;
+    }
+    return minutes + ":" + seconds;
+}
 
 
 DatosClimatologicos();

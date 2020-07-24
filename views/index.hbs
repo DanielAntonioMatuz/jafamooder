@@ -39,14 +39,14 @@
 <!-- clima -->
 <div class="clima ">
     <div class="imagen">
-
         <img src="./img/sol.png" alt="" class="sol">
     </div>
-    <h1 class="temp">{{clima.temperatura}}°c</h1>
-    <h2 class="info">Centigrados</h2>
 
-    <h1 class="temp">{{clima.humedad}}%</h1>
-    <h2 class="info">Humedad</h2>
+    <h2 class="temp">{{clima.temperatura}}°c</h2>
+    <h3 class="info">Centigrados</h3>
+
+    <h2 class="temp">{{clima.humedad}}%</h2>
+    <h3 class="info">Humedad</h3>
 </div>
 <!-- clima -->
 
@@ -57,12 +57,12 @@
 <div class="playlista">
 
 
-    <h1 class="ligas">Canciones</h1>
+    <h1 class="ligas">{{titulo}} | Canciones</h1>
 
     <table class="tabla " align="center">
         <tr class="cabeceraTabla">
             <td>
-                #
+                Caratula
             </td>
             <td>
                 Titulo
@@ -75,20 +75,19 @@
             </td>
         </tr>
 
-
         {{#each rolas}}
-            <tr>
+            <tr id="music">
                 <td class="numeroCancion">
-                    1
+                    <img src="{{image}}" alt="" style="max-height:100px; max-width:100px;" class="sol">
                 </td>
                 <td>
                     {{nombre}}
                 </td>
                 <td>
-                    {{url}}
+                    {{artista}}
                 </td>
                 <td>
-                    3:40
+                    {{duration}}
                 </td>
             </tr>
         {{/each}}
@@ -102,13 +101,9 @@
 <!-- Seccion de playlist -->
 
 
-
 <!-- footer -->
 <div class="reproductor fixed-bottom">
-
-    <iframe src="https://open.spotify.com/embed/album/1DFixLWuPkv3KT3TnV35m3" width="100%" height="380"  frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-
-
+    <iframe style="background-color: #2E3033!important;" id="demo-player"  src="https://open.spotify.com/embed/playlist/{{listaderepro}}" width="100%" height="380"  frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
 </div>
 <!-- footer -->
 
@@ -119,5 +114,15 @@
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script>
+    $(function() {
+
+        $('#music').on('change', function() {
+            var srcVideo = $(this).val();
+            $('#demo-player').attr('src', srcVideo);
+        });
+
+    });
+</script>
 </body>
 </html>
