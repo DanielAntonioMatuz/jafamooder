@@ -20,8 +20,10 @@ var estadoClima;
 var rolas=[];
 var urlrolas=[];
 var listaderepro=[];
+var usuario = [];
 var duration;
 var titulo;
+var nublado, lluvioso, soleado, nevado;
 var seconds = Math.floor((duration / 1000) % 60),
     minutes = Math.floor((duration / (1000 * 60)) % 60);
 
@@ -33,7 +35,9 @@ router.get('/', function(req, res, next) {
              clima: {temperatura: temperatura.toFixed(1), humedad: humedad},
              rolas,
              listaderepro,
-             titulo
+             titulo,
+             usuario,
+             soleado, nublado, lluvioso, nevado
           }
        res.render('index', datos);
 });
@@ -57,18 +61,23 @@ function DatosClimatologicos() {
         if(err){}
         temperatura=body.main.temp;
         humedad= body.main.humidity;
+        //soleado = true;
         temperatura=temperatura-273.15;
-        if(temperatura>26 && humedad<40){
+        if(temperatura>26 && humedad<60){
             estadoClima="Soleado";
+            soleado = true;
         }
-        if(temperatura<30 && humedad>40){
+        if(temperatura<30 && humedad>60){
             estadoClima="Nublado";
+            nublado = true;
         }
         if (temperatura<30 && humedad>70) {
             estadoClima="Lluvioso";
+            lluvioso = true;
         }
         if (temperatura<15 && humedad<60) {
             estadoClima="Nevado";
+            nevado =  true;
         }
     });
 }
@@ -91,13 +100,18 @@ function AccesoPlaylist() {
 
 
 function Playlist() {
+
+
+
     request.get(options, function(error, response, body) {
         if (response){
             for (let i = 0; i < body.items.length; i++) {
                 if(body.items[i].name==estadoClima){
+                    usuario.length = 0;
                     playlist_url = body.items[i].href;
                     listaderepro = body.items[i].id;
                     titulo = body.items[i].name;
+                    usuario.push({nombre: body.items[i].owner.display_name, imagen: ''})
 
                 }
 
@@ -111,12 +125,14 @@ function Playlist() {
                 };
                 request.get(option, function(error, response, body) {
                     if (response) {
+                        rolas.length = 0;
                         for (let x = 0; x < body.tracks.items.length; x++) {
-                            rolas.push({nombre: body.tracks.items[x].track.name, url: body.tracks.items[x].track.external_urls.spotify, artista: body.tracks.items[x].track.artists[0].name,
-                                duration: getYoutubeLikeToDisplay(body.tracks.items[x].track.duration_ms), image: body.tracks.items[x].track.album.images[0].url
+                            rolas.push({nombre: body.tracks.items[x].track.name, url: body.tracks.items[x].track.id
+                                , artista: body.tracks.items[x].track.artists[0].name,
+                                duration: convertTime(body.tracks.items[x].track.duration_ms), image: body.tracks.items[x].track.album.images[0].url
 
                             });
-
+                            //console.log(rolas)
                             urlrolas.push(body.tracks.items[x].track.external_urls.spotify);
                             //console.log(body.tracks.items[x].track.external_urls.spotify);
                         }
@@ -130,7 +146,7 @@ function Playlist() {
     });
 }
 
-function getYoutubeLikeToDisplay(millisec) {
+function convertTime(millisec) {
     var seconds = (millisec / 1000).toFixed(0);
     var minutes = Math.floor(seconds / 60);
     var hours = "";
@@ -154,13 +170,26 @@ DatosClimatologicos();
 AutorizacionUsuario();
 //setTimeout(EstadoClimatologico(),2000);
 setTimeout(AccesoPlaylist,2000);
-setTimeout(Playlist,3000);
-setTimeout(datos,4000);
+setTimeout(Playlist,4000);
+setTimeout(datos,8000);
+
 function datos() {
     console.log(temperatura);
     console.log(humedad);
     console.log(estadoClima);
-    console.log(playlist_url);
+    console.log(rolas);
+    //console.log(playlist_url);
+    //console.log(rolas);
+    DatosClimatologicos();
+    AutorizacionUsuario();
+    //setTimeout(EstadoClimatologico(),2000);
+    console.log("Actualizando ...");
+    setTimeout(AccesoPlaylist,52000);
+    //rolas.length=0;
+    //urlrolas.length=0;
+    setTimeout(Playlist,54000);
+    setTimeout(datos,58000);
+
 }
 
 

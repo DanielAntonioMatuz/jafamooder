@@ -4,6 +4,85 @@ body{
 
 }
 
+.player {
+    background: transparent;
+    color: #FFFFFF;
+    border: none;
+    outline:none;
+}
+
+
+.color{
+    background: var(--negro) 0% 0% no-repeat padding-box!important;
+    border-style: solid;
+    border-bottom-color: #05F2DB;
+}
+
+.bg-dark {
+    background-color: var(--negro) 0% 0% no-repeat padding-box!important;
+}
+
+
+.circ1{
+    width:120px;
+    height:120px;
+    border-radius:120px;
+    background-color:rgb(255, 255, 255);
+    margin:20px 0 0 60px;
+}
+
+
+.circ2{
+    width:150px;
+    height:80px;
+    border-radius: 80px / 50px;
+    background-color:rgb(255, 255, 255);
+    margin:-90px 0 0 80px;
+}
+
+.circ3{
+    width:150px;
+    height:90px;
+    border-radius: 80px / 50px;
+    background-color:rgb(255, 255, 255);
+    margin:-90px 0 0 0px;
+}
+
+@-webkit-keyframes animar{
+    0%  { }
+    50% { -webkit-transform:translateX(20px) scale(1.2);}
+    100% {-webkit-transform:translateX(0px); }
+}
+
+#sq{
+    -webkit-animation-name: animar;
+    -webkit-animation-duration: 20s;
+    -webkit-animation-timing-function: lineal;
+    -webkit-animation-iteration-count:infinite;
+    opacity: 0.6;
+    margin:0;
+    position:absolute;
+}
+
+#sq2{
+    -webkit-animation-name: animar;
+    -webkit-animation-duration: 15s;
+    -webkit-animation-timing-function: lineal;
+    -webkit-animation-iteration-count:infinite;
+    opacity: 0.4;
+    position:absolute;
+    margin:30px 0 0 0;
+}
+
+#sq3{
+    -webkit-animation-name: animar;
+    -webkit-animation-duration: 12s;
+    -webkit-animation-timing-function: lineal;
+    -webkit-animation-iteration-count:infinite;
+    opacity: 0.7;
+    position:absolute;
+    margin:100px 0 0 50px;
+}
 
 
 
@@ -146,7 +225,7 @@ align-items: center;
 
 .imagen{
     width: 300px;
-    height: 200px;
+    height: 100px;
     display: flex;
 justify-content: center;
 align-items: center;
